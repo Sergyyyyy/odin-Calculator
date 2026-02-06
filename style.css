@@ -6,4 +6,45 @@
 
 body{
     background-color: rgb(41, 41, 41);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-h1{
+    margin-top: 30px;
+}
+
+.calc-input{
+    margin-top: 130px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.5em;
+    width: 400px;
+    height: 100px;
+}
+
+.calc-container{
+    margin-bottom: 30px;
+    padding: 0px 100px 100px 100px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.calc-btns{
+    height: 100px;
+    width: 100px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.5em;
+    background-color: rgb(72, 72, 72);
+    color: white;
+}
+
+.operator-btns{
+    background-color: gray;
+}
+
+#enter-btn{
+    background-color: rgb(53, 78, 100);
 }
