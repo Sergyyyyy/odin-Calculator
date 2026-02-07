@@ -1,6 +1,8 @@
 let allBtns = document.querySelectorAll(".calc-btns")
 let input = document.getElementById("calc-input")
 
+let operators = ["+", "-", "*", "/"]
+
 function add(x, y) {
     return x + y
 }
@@ -21,33 +23,56 @@ function operate(operator, x, y) {
     switch (operator) {
         case "+":
             return add(x, y)
-            break;
         case "-":
             return subtract(x, y)
-            break;
         case "*":
             return multiply(x, y)
-            break;
         case "/":
             return divide(x, y)
-            break;
     }
 }
 
-for (let i = 0; i <= allBtns.length; i++) {
+function testOperator() {
+    console.log(operate("+", 3, 5));
+    console.log(operate("-", 3, 5));
+    console.log(operate("*", 3, 5));
+    console.log(operate("/", 3, 5));
+}
+
+for (let i = 0; i < allBtns.length; i++) {
     allBtns[i].addEventListener('click', function () {
-        if (allBtns[i].innerHTML == "clear") {
-            document.getElementById("clear-btn").onclick = function () {
-                input.value = ""
-            }
-            if (allBtns[i].innerHTML == "enter") {
-                document.getElementById("enter-btn").onclick = function () {
-                    let currentOp = allBtns[i]
-                    let value = operate(currentOp, allBtns[i], allBtns[i])
-                    input.value += value
+        let value = allBtns[i].innerHTML
+        if (value == "clear") {
+            input.value = ""
+            console.log("clear-works")
+            return
+        }
+        if (value == "enter") {
+            let holder = ""
+            holder = input.value
+            let newHolder = holder.replace(/\s/g, "")
+            for (let i = 0; i < newHolder.length; i++){
+                if (operators.includes(newHolder[i])){
+                    operate(newHolder[i])
                 }
             }
         }
+
         input.value += allBtns[i].innerHTML
     })
 }
+
+
+let sampleText = "Hello ! World"
+let newer = sampleText.replace(/\s/g, "")
+
+function findChar(char) {
+    for (let i = 0; i < newer.length; i++) {
+        if (newer[i] === char) {
+            return `char ${char} is found!`;
+        }
+    }
+    return `char ${char} is not found!`;
+}
+
+console.log(findChar("!"))
