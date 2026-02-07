@@ -47,15 +47,25 @@ for (let i = 0; i < allBtns.length; i++) {
             console.log("clear-works")
             return
         }
-        if (value == "enter") {
-            let holder = ""
-            holder = input.value
+
+        if (value == "") [
+
+        ]
+
+        if (value == "=") {
+            let num1, num2
+            let holder = input.value
             let newHolder = holder.replace(/\s/g, "")
-            for (let i = 0; i < newHolder.length; i++){
-                if (operators.includes(newHolder[i])){
-                    operate(newHolder[i])
+            for (let i = 0; i < newHolder.length; i++) {
+                if (operators.includes(newHolder[i])) {
+                    num1 = newHolder.slice(0, i)
+                    num2 = newHolder.slice(i + 1)
+                    let result = operate(newHolder[i], Number(num1), Number(num2))
+                    input.value = `${result}`
+                    console.log("enter-works");
                 }
             }
+            return
         }
 
         input.value += allBtns[i].innerHTML
