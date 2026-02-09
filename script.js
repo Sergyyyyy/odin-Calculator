@@ -16,7 +16,7 @@ function multiply(x, y) {
 }
 
 function divide(x, y) {
-    if (x == 0 || y == 0){
+    if (x == 0 || y == 0) {
         return "Lol u dumdum."
     }
     return x / y
@@ -57,6 +57,21 @@ function evaluateAll() {
     }
 }
 
+function checkCorrectDecimals(x, y = null) {
+    let combined = y === null ? String(x) : String(x) + String(y)
+    let dotCount = 0
+
+    for (let i = 0; i < combined.length; i++) {
+        if (combined[i] === ".") {
+            dotCount++
+            if (dotCount > 1) {
+                return input.value = input.value
+            }
+        }
+    }
+}
+
+
 for (let i = 0; i < allBtns.length; i++) {
     allBtns[i].addEventListener('click', () => {
         let value = allBtns[i].innerHTML
@@ -69,26 +84,22 @@ for (let i = 0; i < allBtns.length; i++) {
             evaluateAll()
             return
         }
-        else if (operators.includes(value)){
+        else if (operators.includes(value)) {
             let cleaned = input.value.replace(/\s/g, "")
             let hasOperator = operators.some(op => cleaned.includes(op))
             if (hasOperator) { evaluateAll() }
         }
+
+        checkCorrectDecimals()
         input.value += allBtns[i].innerHTML
     })
 }
 
 
-
-
-let sampleText = "Hello ! World"
-let newer = sampleText.replace(/\s/g, "")
-
-function findChar(char) {
-    for (let i = 0; i < newer.length; i++) {
-        if (newer[i] === char) {
-            return `char ${char} is found!`;
-        }
+let sampleText = "10.2.4.1"
+let count = 0
+for (let i = 0; i < sampleText.length; i++) {
+    if (sampleText[i] == ".") {
+        count++
     }
-    return `char ${char} is not found!`;
 }
