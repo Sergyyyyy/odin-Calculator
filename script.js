@@ -16,6 +16,9 @@ function multiply(x, y) {
 }
 
 function divide(x, y) {
+    if (x == 0 || y == 0){
+        return "Lol u dumdum."
+    }
     return x / y
 }
 
@@ -39,38 +42,43 @@ function testOperator() {
     console.log(operate("/", 3, 5));
 }
 
+function evaluateAll() {
+    let num1, num2, holder
+    holder = input.value.replace(/\s/g, "")
+    for (let i = 0; i < holder.length; i++) {
+        if (operators.includes(holder[i])) {
+            num1 = holder.slice(0, i)
+            num2 = holder.slice(i + 1)
+            let result = operate(holder[i], Number(num1), Number(num2))
+            input.value = `${result}`
+            console.log("enter-works");
+            break
+        }
+    }
+}
+
 for (let i = 0; i < allBtns.length; i++) {
-    allBtns[i].addEventListener('click', function () {
+    allBtns[i].addEventListener('click', () => {
         let value = allBtns[i].innerHTML
         if (value == "clear") {
             input.value = ""
             console.log("clear-works")
             return
         }
-
-        if (value == "") [
-
-        ]
-
         if (value == "=") {
-            let num1, num2
-            let holder = input.value
-            let newHolder = holder.replace(/\s/g, "")
-            for (let i = 0; i < newHolder.length; i++) {
-                if (operators.includes(newHolder[i])) {
-                    num1 = newHolder.slice(0, i)
-                    num2 = newHolder.slice(i + 1)
-                    let result = operate(newHolder[i], Number(num1), Number(num2))
-                    input.value = `${result}`
-                    console.log("enter-works");
-                }
-            }
+            evaluateAll()
             return
         }
-
+        else if (operators.includes(value)){
+            let cleaned = input.value.replace(/\s/g, "")
+            let hasOperator = operators.some(op => cleaned.includes(op))
+            if (hasOperator) { evaluateAll() }
+        }
         input.value += allBtns[i].innerHTML
     })
 }
+
+
 
 
 let sampleText = "Hello ! World"
@@ -84,5 +92,3 @@ function findChar(char) {
     }
     return `char ${char} is not found!`;
 }
-
-console.log(findChar("!"))
