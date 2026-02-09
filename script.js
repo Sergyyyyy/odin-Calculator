@@ -49,6 +49,12 @@ function evaluateAll() {
         if (operators.includes(holder[i])) {
             num1 = holder.slice(0, i)
             num2 = holder.slice(i + 1)
+
+            if (!checkCorrectDecimals(num1) || !checkCorrectDecimals(num2)){
+                input.value = "error"
+                return
+            }
+
             let result = operate(holder[i], Number(num1), Number(num2))
             input.value = `${result}`
             console.log("enter-works");
@@ -65,10 +71,11 @@ function checkCorrectDecimals(x, y = null) {
         if (combined[i] === ".") {
             dotCount++
             if (dotCount > 1) {
-                return input.value = input.value
+                return false
             }
         }
     }
+    return true
 }
 
 
@@ -89,17 +96,6 @@ for (let i = 0; i < allBtns.length; i++) {
             let hasOperator = operators.some(op => cleaned.includes(op))
             if (hasOperator) { evaluateAll() }
         }
-
-        checkCorrectDecimals()
         input.value += allBtns[i].innerHTML
     })
-}
-
-
-let sampleText = "10.2.4.1"
-let count = 0
-for (let i = 0; i < sampleText.length; i++) {
-    if (sampleText[i] == ".") {
-        count++
-    }
 }
